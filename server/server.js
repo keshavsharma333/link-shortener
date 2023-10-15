@@ -10,9 +10,11 @@ const app = express();
 if (process.env.NODE_ENV !== "production") {
   app.use(
     cors({
-      origin: process.env.FRONT_END_URL,
+      origin: process.env.FRONT_END_URL || true,
     })
   );
+} else {
+  app.use(cors());
 }
 app.use(express.static(path.join(__dirname, "dist")));
 connectDb();
